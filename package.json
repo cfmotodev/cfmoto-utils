@@ -1,0 +1,42 @@
+{
+  "name": "@cfmoto/utils",
+  "version": "1.0.0",
+  "description": "cfmoto 工具集",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack serve --mode development --open",
+    "buildTest": "webpack build --mode production",
+    "build": "webpack build --mode production",
+    "jsdoc": "node_modules/.bin/jsdoc -r -c jsdoc-conf.json -R README.md -d dist/jsdoc"
+  },
+  "keywords": [
+    "cfmoto"
+  ],
+  "author": "cfmoto fed",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/eslint-parser": "^7.22.10",
+    "@babel/preset-env": "^7.18.10",
+    "babel-loader": "^8.2.5",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "gulp": "^4.0.2",
+    "gulp-oss-upload": "^1.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "prettier": "^3.0.2",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.8.2",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.0"
+  }
+}
