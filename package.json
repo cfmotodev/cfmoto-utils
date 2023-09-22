@@ -10,6 +10,10 @@
     "build": "webpack build --mode production",
     "jsdoc": "node_modules/.bin/jsdoc -r -c jsdoc-conf.json -R README.md -d dist/jsdoc"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ttps://github.com/cfmotodev/cfmoto-utils.git"
+  },
   "keywords": [
     "cfmoto"
   ],
