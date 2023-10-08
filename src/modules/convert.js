@@ -105,9 +105,9 @@ export function humpToUnderline(values) {
 }
 
 /**
- * 过滤空值
+ * 过滤属性值
  */
-export function filterEmptyField(options = {}, emptyValues = ['', null, [], [null, null], {}, 'null']) {
+export function filterValue(options = {}, emptyValues = ['', null, [], [null, null], {}, 'null']) {
   const oldData = JSON.parse(JSON.stringify(options));
   const newData = JSON.parse(JSON.stringify(options));
   Object.keys(oldData).forEach((key) => {
@@ -123,7 +123,7 @@ export function filterEmptyField(options = {}, emptyValues = ['', null, [], [nul
  */
 export function formatterLatelyTime(value) {
   if (!value) return '';
-  const datetime = value.split('.')[0].split('-').join('/');
+  const datetime =  value instanceof Date? value: value.split('.')[0].split('-').join('/');
   const preTime = new Date(datetime).getTime() / 1000 / 60;
   const nowTime = new Date().getTime() / 1000 / 60;
   if (nowTime - preTime < 1) {

@@ -32,6 +32,17 @@ export const urlToBase64 = async (url) => {
   });
 };
 
+export async function urlToFile(url) {
+  const base64 = await urlToBase64(url);
+  return base64ToFile(base64);
+}
+
+export async function urlToBlob(url) {
+  const base64 = await urlToBase64(url);
+  return base64ToBlob(base64);
+}
+
+
 export function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
@@ -124,15 +135,6 @@ export function blobToArrayBuffer(blob) {
   });
 }
 
-export async function urlToFile(url) {
-  const base64 = await urlToBase64(url);
-  return base64ToFile(base64);
-}
-
-export async function urlToBlob(url) {
-  const base64 = await urlToBase64(url);
-  return base64ToBlob(base64);
-}
 
 // ios翻译文件内容
 export function jsonToStrings(options = {}) {

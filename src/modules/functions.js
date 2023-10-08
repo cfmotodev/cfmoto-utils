@@ -7,17 +7,17 @@
 /**
  * 节流防抖
  */
-export function throttle(delay) {
+export function throttle(delay,fn) {
   // last为上一次触发回调的时间, timer是定时器
   let last = 0;
   let timer = null;
   // 将throttle处理结果当作函数返回
 
-  return function a(fn) {
+  return function a(...args) {
     // 保留调用时的this上下文
     const context = this;
     // 保留调用时传入的参数
-    const args = arguments;
+    // const args = arguments;
     // 记录本次触发回调的时间
     const now = +new Date();
 
