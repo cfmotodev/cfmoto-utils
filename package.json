@@ -1,5 +1,5 @@
 {
-  "name": "@cfmoto/utils",
+  "name": "cfmoto-utils",
   "version": "1.0.0",
   "description": "cfmoto 工具集",
   "main": "src/index.js",
@@ -15,9 +15,12 @@
     "url": "git+ttps://github.com/cfmotodev/cfmoto-utils.git"
   },
   "keywords": [
-    "cfmoto"
+    "cfmoto",
+    "utils",
+    "cfmoto-utils",
+    "@cfmoto/utils"
   ],
-  "author": "cfmoto fed",
+  "author": "CFMOTO FED",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.18.13",
