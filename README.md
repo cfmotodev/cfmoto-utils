@@ -151,7 +151,7 @@ CONSTANTS.PATTERN_PASSWORD
 | children | String  | 是 | children | 生成的子节点属性名称 |
 | values | Array  | 是 | \[{id:'3',parentId:'2'}\] | 所有节点数据 |
 
-- 返回值 Array<Object> result
+- 返回值 Array\<\Object\> result
 
 | 属性 |  类型 | 说明 | 示例
 | :----- | :---- | :---- |  :---- |
