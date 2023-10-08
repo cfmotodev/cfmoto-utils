@@ -6,7 +6,7 @@
  * url下载后转为base64
  * @param {*} url
  * @returns
- */ 
+ */
 export const urlToBase64 = async (url) => {
   if (!/^[\w]+\\:/.test(url) && !/^\//.test(url)) {
     return url;
@@ -134,14 +134,100 @@ export async function urlToBlob(url) {
   return base64ToBlob(base64);
 }
 
-export async function pdfToPage(file) {
-  if (!file) return [];
+// ios翻译文件内容
+export function jsonToStrings(options = {}) {
+  return Object.keys(options).map((key) => {
+    const items = options[key];
+    const value = Object.keys(items)
+      .map((itemKey) => {
+        return `${itemKey} = "${items[itemKey]}";`;
+      })
+      .join('\n');
+    const item = { type: 'strings', key };
+    item.value = new Blob([value], {
+      type: 'application/strings',
+    });
+    return item;
+  });
+}
+
+// android翻译文件内容
+export function jsonToXML(options = {}) {
+  return Object.keys(options).map((key) => {
+    const items = options[key];
+    const value = Object.keys(items)
+      .map((itemKey) => {
+        return `    <string name="${itemKey}">${items[itemKey]}</string>`;
+      })
+      .join('\n');
+    const item = { type: 'xml', key };
+    const content = `<?xml version="1.0" encoding="utf-8"?>\n<resources>\n${value}\n</resources>`;
+    item.value = new Blob([content], {
+      type: 'application/xml',
+    });
+    return item;
+  });
+}
+
+// js翻译文件内容
+export function jsonToJavascript(options = {}) {
+  function parseObjectValue(outValue = {}) {
+    let valueMap = {};
+    const keys = Object.keys(outValue).map((key) => `${key}`.split('.'));
+    keys.forEach((key) => {
+      key.forEach((name, index) => {
+        // const originKeys1 = key
+        //   .slice(0, index)
+        //   .map((name2) => `['${name2}']`)
+        //   .join('');
+        const originKeys2 = key
+          .slice(0, index + 1)
+          .map((name2) => `['${name2}']`)
+          .join('');
+        const currentKeys1 = key
+          .slice(0, index)
+          .map((name2) => `${name2}`)
+          .join('.');
+        const currentKeys2 = key
+          .slice(0, index + 1)
+          .map((name2) => `${name2}`)
+          .join('.');
+        try {
+          // 以.分割的上一级key重复，以{}覆盖
+          if (index > 0 && new RegExp(currentKeys1).test(currentKeys2)) {
+            eval(`outValue[${currentKeys1}] = outValue[${currentKeys1}] && typeof outValue[${currentKeys1}] === 'object'? outValue[${currentKeys1}]:{};`);
+            eval(`valueMap[${currentKeys1}] = outValue[${currentKeys1}] && typeof outValue[${currentKeys1}] === 'object'? outValue[${currentKeys1}]:{};`);
+          }
+          const newValue = eval(`outValue["${currentKeys2}"]||valueMap${originKeys2}||{}`);
+          eval(`valueMap${originKeys2} =  ${JSON.stringify(newValue)}`);
+        } catch (error) {
+          console.log(error);
+          eval(`valueMap${originKeys2} =  {}`);
+        }
+      });
+    });
+    return valueMap;
+  }
+
+  return Object.keys(options).map((key) => {
+    const items = options[key];
+    const value = `export default ${JSON.stringify(parseObjectValue(items), null, '  ')}`;
+    const item = { type: 'js', key, fileName: `${key}.js` };
+    item.value = new Blob([value], {
+      type: 'text/javascript',
+    });
+    return item;
+  });
+}
+
+export async function pdfFileToPage(pdfjsLib, file) {
+  if (!file || !pdfjsLib) return [];
   const arrayBuffer = await fileToArrayBuffer(file);
-  const pdfContent = await window.pdfjsLib.getDocument(arrayBuffer).promise.then((res) => res);
+  const pdfContent = await pdfjsLib.getDocument(arrayBuffer).promise.then((res) => res);
   const numPageArrays = [...new Array(pdfContent.numPages)].map((val, index) => index + 1);
   return Promise.all(numPageArrays.map((page) => pdfContent.getPage(page)));
 }
-export async function pdfToImage({ pages, onProgress }) {
+export async function pdfPageToImage({ pages, onProgress }) {
   if (!pages) return [];
   let current = 0;
   const images = await Promise.all(

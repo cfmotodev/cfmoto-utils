@@ -26,10 +26,10 @@ function sort(value) {
   /* eslint-enable no-caller,no-restricted-properties  */
 }
 
-function stringify(value, reviver) {
+export function stringify(value, reviver) {
   return JSON.stringify(sort(value), reviver);
 }
-function parse(value, reviver) {
+export function parse(value, reviver) {
   return JSON.parse(sort(value), reviver);
 }
 

@@ -7,7 +7,7 @@
 /**
  * 节流防抖
  */
-export default function throttle(delay) {
+export function throttle(delay) {
   // last为上一次触发回调的时间, timer是定时器
   let last = 0;
   let timer = null;
@@ -37,10 +37,63 @@ export default function throttle(delay) {
   };
 }
 
+/**
+ * 节点递归算法
+ * @param {*} id
+ * @param {*} parentId
+ * @param {*} children
+ * @returns
+ */
+export function recursiveNode(id = 'id', parentId = 'parentId', children = 'children') {
+  return function recurse(paramNodes = [], paramsParent) {
+    const nodes = [];
+    const parentNode = paramsParent || {};
+    for (let i = 0, length = paramNodes.length; i < length; i++) {
+      const node = paramNodes[i];
+      if ((!node[parentId] && !parentNode[id]) || (parentNode[id] && node[parentId] === parentNode[id])) {
+        node[children] = recurse(paramNodes, node);
+        node.hasChildren = node[children].length > 0;
+        if (!node.hasChildren) {
+          delete node[children];
+        }
+        nodes.push(node);
+      }
+    }
+    return nodes;
+  };
+}
 
+/**
+ * 展开节点
+ * @param {*} values 
+ * @param {*} children 
+ * @returns 
+ */
+export function spreadNode(values = [], children = 'children') {
+  if (!value || !value.length) return value;
+  const newValues = [];
+  for (item in values) {
+    const newItem = JSON.parse(JSON.stringify(item));
+    const itemChildren = item[children] || [];
+    if (newItem[children]) {
+      delete newItem[children];
+    }
+    newValues = [newItem, ...arguments.callee(itemChildren, children)];
+  }
+  return newValues;
+}
 
-// 从应用市场唤起APP
-export default function launchApplicationMarket(id) {
+// 从应用市场唤起APP-国际标准
+export default function launchApplication(id) {
+  if (getUserAgent('iPhone') || getUserAgent('iPod') || getUserAgent('iPad')) {
+    window.location.href = `https://itunes.apple.com/cn/app/id${id}`;
+    return;
+  }
+  window.location.href = `https://play.google.com/store/apps/details?id=${id}`;
+}
+
+// 从应用市场唤起APP-国内标准
+export function launchApplicationDAMS(id) {
   function getUserAgent(name) {
     return navigator.userAgent.toLowerCase().match(new RegExp(name.toLowerCase(), 'i'));
   }
