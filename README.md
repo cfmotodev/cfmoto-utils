@@ -164,11 +164,11 @@ CONSTANTS.PATTERN_PASSWORD
 | values | Array  | 是 |  \[\{id:'3',parentId:'2',children:\[\]\}\]  | 所有节点数据 |
 | children | String  | 是 | children | 展开的子节点属性名称 |
 
-- 返回值 Array<Object> result
+- 返回值 Array\<\Object\> result
 
 | 属性 |  类型 | 说明 | 示例
 | :----- | :---- | :---- |  :---- |
-| result | Array<Object>  | 节点组合 | \[{id:'3',parentId:'2'}\] |
+| result | Array\<\Object\>  | 节点组合 | \[{id:'3',parentId:'2'}\] |
 
 ### 从应用市场唤起APP-国际标准 
 ```launchApplication(id)```
