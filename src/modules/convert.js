@@ -142,18 +142,6 @@ export function formatterLatelyTime(value) {
 }
 
 /**
- * 解析url参数
- */
-
-function keyPraseMiddleLine(key) {
-  return key
-    .replace(/([A-Z])/g, function q(patternStr) {
-      return `-${patternStr.toLowerCase()}`;
-    })
-    .replace(/^-/, '');
-}
-
-/**
  * Pascal转-
  * @param {*} key 
  * @returns 
