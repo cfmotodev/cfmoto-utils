@@ -4,13 +4,13 @@ cfmoto工具
 ## 一、快速开始
 ### 安装
 ```
-npm install -S @cfmoto/utils
+npm install -S cfmoto-utils
 
 ```
 
 ### 使用
 ```
-import { parseQuery } from '@cfmoto/utils';
+import { parseQuery } from 'cfmoto-utils';
 
 parseQuery(window.location.href)
 
@@ -21,7 +21,7 @@ parseQuery(window.location.href)
 ### 图片格式
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.FILE_ACCEPT_IMAGE
 
@@ -29,7 +29,7 @@ CONSTANTS.FILE_ACCEPT_IMAGE
 ### 图片与视频格式
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.FILE_ACCEPT_MEDIA
 
@@ -38,7 +38,7 @@ CONSTANTS.FILE_ACCEPT_MEDIA
 ### 办公文件格式
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.FILE_ACCEPT_OFFICE
 
@@ -47,7 +47,7 @@ CONSTANTS.FILE_ACCEPT_OFFICE
 ### 手机号正则
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.PATTERN_PHONE
 
@@ -56,7 +56,7 @@ CONSTANTS.PATTERN_PHONE
 ### 邮箱正则
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.PATTERN_EMAIL
 
@@ -65,7 +65,7 @@ CONSTANTS.PATTERN_EMAIL
 ### 特殊符号正则
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.PATTERN_SYMBOL
 
@@ -74,7 +74,7 @@ CONSTANTS.PATTERN_SYMBOL
 ### 表情正则
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.PATTERN_EMOJI
 
@@ -83,7 +83,7 @@ CONSTANTS.PATTERN_EMOJI
 ### 身份证号
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.PATTERN_IDENTITY
 
@@ -92,7 +92,7 @@ CONSTANTS.PATTERN_IDENTITY
 ### url
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.PATTERN_URL
 
@@ -101,7 +101,7 @@ CONSTANTS.PATTERN_URL
 ### 十六进制颜色
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.PATTERN_HEX
 
@@ -110,7 +110,7 @@ CONSTANTS.PATTERN_HEX
 ### 车牌号
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.PATTERN_PLAT_NUMBER
 
@@ -119,7 +119,7 @@ CONSTANTS.PATTERN_PLAT_NUMBER
 ### 密码正则：8位以上数字大小写字母特殊符号
 
 ```
-import { CONSTANTS } from '@cfmoto/utils';
+import { CONSTANTS } from 'cfmoto-utils';
 
 CONSTANTS.PATTERN_PASSWORD
 
@@ -326,7 +326,7 @@ CONSTANTS.PATTERN_PASSWORD
 ### JSON排序深拷贝
 
 ```
-import {JSONSort} from '@cfmoto/utils'
+import {JSONSort} from 'cfmoto-utils'
 JSONSort.stringify({a:'11', b: '22'});
 JSONSort.parse("{}")
 ```
