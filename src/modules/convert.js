@@ -7,7 +7,7 @@
  * @param {*} url 
  * @returns 
  */
-export function parseQuery(url = '') {
+export function queryParse(url = '') {
   const query = {};
   try {
     const queryStr = url.split('?')[1] || '';
@@ -37,11 +37,11 @@ export function parseQuery(url = '') {
  * @param {*} query 
  * @returns 
  */
-export function stringifyQuery(query = {}) {
+export function queryStringify(query = {}) {
   return Object.keys(query)
     .map((key) => {
       if (query[key] instanceof Array) {
-        return stringifyQuery({ [key]: query[key] });
+        return queryStringify({ [key]: query[key] });
       }
       if (query[key] instanceof Object) {
         return `${key}=${JSON.stringify(query[key])}`;

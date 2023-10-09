@@ -3,10 +3,13 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry:{
+    main: './src/main.js',
+    index: './src/index.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: `index.min.js`,
+    filename: `[name].min.js`,
   },
   module: {
     rules: [
@@ -16,7 +19,23 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'], // 设置编译的规则
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'entry',
+                  modules: 'auto',
+                  "corejs": 3,
+                }
+              ],
+            ], // 设置编译的规则
+            "plugins": [
+              [ 
+                "@babel/plugin-transform-runtime", {
+                  "corejs": 3
+                }
+              ]
+            ]
           },
         },
       },

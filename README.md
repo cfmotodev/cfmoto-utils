@@ -10,9 +10,9 @@ npm install -S cfmoto-utils
 
 ### 使用
 ```
-import { parseQuery } from 'cfmoto-utils';
+import { queryParse } from 'cfmoto-utils';
 
-parseQuery(window.location.href)
+queryParse(window.location.href)
 
 ```
 
@@ -226,7 +226,7 @@ CONSTANTS.PATTERN_PASSWORD
 | result | String | uuid | dadd-ddafd-fddf-fdsfs |
 
 ### 解析url查询参数
-```parseQuery(url)```
+```queryParse(url)```
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
 | :-----| :---- | :---- | :---- | :---- |
 | url | String | 是 | ?a=11&b=22 | url问号后的部分 |
@@ -238,7 +238,7 @@ CONSTANTS.PATTERN_PASSWORD
 | result | Object | JSON对象 | { a: 11, b: 22 } |
 
 ### 将url转换成url查询参数
-```stringifyQuery(options)```
+```queryStringify(options)```
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
 | :-----| :---- | :---- | :---- | :---- |
 | options | Object | 是 | {a: 11, b: 22} | JSON对象 |
