@@ -386,7 +386,7 @@ JSONSort.parse("{}")
 
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
 | :-----| :---- | :---- | :---- | :---- |
-| options | Object | 是 | Object.keys(options) | key：翻译语言标识，options\[key\]：翻译语言内容 |
+| options | Object | 是 | \{zh:\{a:'aa'\}\} | Object.keys(options).map(key=>options\[key\]) key：翻译语言标识，options\[key\]：翻译语言内容 |
 
 - 返回值 String result
 
@@ -399,7 +399,7 @@ JSONSort.parse("{}")
 
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
 | :-----| :---- | :---- | :---- | :---- |
-| options | Object | 是 | Object.keys(options) | key：翻译语言标识，options\[key\]：翻译语言内容 |
+| options | Object | 是 | \{zh:\{a:'aa'\}\} | Object.keys(options).map(key=>options\[key\]) key：翻译语言标识，options\[key\]：翻译语言内容 |
 
 - 返回值 String result
 
@@ -413,7 +413,7 @@ JSONSort.parse("{}")
 
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
 | :-----| :---- | :---- | :---- | :---- |
-| options | Object | 是 | Object.keys(options) | key：翻译语言标识，options\[key\]：翻译语言内容 |
+| options | Object | 是 | \{zh:\{a:'aa'\}\} | Object.keys(options).map(key=>options\[key\]) key：翻译语言标识，options\[key\]：翻译语言内容 |
 
 - 返回值 String result
 
