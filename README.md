@@ -405,7 +405,7 @@ JSONSort.parse("{}")
 
 | 属性 |  类型 | 说明 | 示例
 | :----- | :---- | :---- |  :---- |
-| result | String | ios翻译文件文本内容 | <?xml version="1.0" encoding="utf-8"?>\n<resources>\n${value}\n</resources> |
+| result | String | android翻译文件文本内容 | <?xml version="1.0" encoding="utf-8"?>\n<resources>\n${value}\n</resources> |
 
 ### js翻译文件内容
 ```jsonToJavascript(options)```
@@ -419,7 +419,7 @@ JSONSort.parse("{}")
 
 | 属性 |  类型 | 说明 | 示例
 | :----- | :---- | :---- |  :---- |
-| result | String | ios翻译文件文本内容 | export default {} |
+| result | String | javascript翻译文件文本内容 | export default {} |
 
 
 
@@ -445,4 +445,8 @@ JSONSort.parse("{}")
 | pages | Array<Pages> | 是 | PdfPage | PDF页面对象 |
 | onProgress | Function | 是 | event | pdf页面转换进度 |
 
+- 返回值 Promise<Array<String>> bas64String
 
+| 属性 |  类型 | 说明 | 示例
+| :----- | :---- | :---- |  :---- |
+| bas64String | Promise<Array<String>> | base64字符串数组 |  |
