@@ -142,12 +142,12 @@ export function jsonToStrings(options = {}) {
     const items = options[key];
     const value = Object.keys(items)
       .map((itemKey) => {
-        return `${itemKey} = "${items[itemKey]}";`;
+        return `"${itemKey}"="${items[itemKey]}";`;
       })
       .join('\n');
     const item = { type: 'strings', key };
     item.value = new Blob([value], {
-      type: 'application/strings',
+      type: 'text/plain',
     });
     return item;
   });
@@ -163,7 +163,7 @@ export function jsonToXML(options = {}) {
       })
       .join('\n');
     const item = { type: 'xml', key };
-    const content = `<?xml version="1.0" encoding="utf-8"?>\n<resources>\n${value}\n</resources>`;
+    const content = `<?xml version="1.0" encoding="utf-8"?>\n<resources xmlns:tools="http://schemas.android.com/tools">\n${value}\n</resources>`;
     item.value = new Blob([content], {
       type: 'application/xml',
     });
@@ -177,34 +177,38 @@ export function jsonToJavascript(options = {}) {
     let valueMap = {};
     const keys = Object.keys(outValue).map((key) => `${key}`.split('.'));
     keys.forEach((key) => {
+      console.log(key);
       key.forEach((name, index) => {
-        // const originKeys1 = key
-        //   .slice(0, index)
-        //   .map((name2) => `['${name2}']`)
-        //   .join('');
-        const originKeys2 = key
+        const prevOriginKeys = key
+          .slice(0, index)
+          .map((name2) => `['${name2}']`)
+          .join('');
+        const currentOriginKeys = key
           .slice(0, index + 1)
           .map((name2) => `['${name2}']`)
           .join('');
-        const currentKeys1 = key
+        const prevPathKeys = key
           .slice(0, index)
           .map((name2) => `${name2}`)
           .join('.');
-        const currentKeys2 = key
+        const currentPathKeys = key
           .slice(0, index + 1)
           .map((name2) => `${name2}`)
           .join('.');
         try {
-          // 以.分割的上一级key重复，以{}覆盖
-          if (index > 0 && new RegExp(currentKeys1).test(currentKeys2)) {
-            eval(`outValue[${currentKeys1}] = outValue[${currentKeys1}] && typeof outValue[${currentKeys1}] === 'object'? outValue[${currentKeys1}]:{};`);
-            eval(`valueMap[${currentKeys1}] = outValue[${currentKeys1}] && typeof outValue[${currentKeys1}] === 'object'? outValue[${currentKeys1}]:{};`);
+          console.log(currentOriginKeys, currentPathKeys);
+          if (!outValue[currentPathKeys] && eval(`!valueMap${currentOriginKeys}`)) {
+            eval(`valueMap${currentOriginKeys}={}`);
           }
-          const newValue = eval(`outValue["${currentKeys2}"]||valueMap${originKeys2}||{}`);
-          eval(`valueMap${originKeys2} =  ${JSON.stringify(newValue)}`);
+          // // 以.分割的上一级key重复，以{}覆盖
+          if (index > 0 && new RegExp(prevPathKeys).test(currentPathKeys)) {
+            eval(`valueMap${prevOriginKeys} = valueMap${prevOriginKeys} && typeof valueMap${prevOriginKeys} === 'object'? valueMap${prevOriginKeys}:{};`);
+          }
+          const newValue = eval(`outValue["${currentPathKeys}"]||valueMap${currentOriginKeys}||{}`);
+          console.log(newValue);
+          eval(`valueMap${currentOriginKeys} =  ${JSON.stringify(newValue)}`);
         } catch (error) {
-          console.log(error);
-          eval(`valueMap${originKeys2} =  {}`);
+          eval(`valueMap${currentOriginKeys} =  {}`);
         }
       });
     });
@@ -214,7 +218,7 @@ export function jsonToJavascript(options = {}) {
   return Object.keys(options).map((key) => {
     const items = options[key];
     const value = `export default ${JSON.stringify(parseObjectValue(items), null, '  ')}`;
-    const item = { type: 'js', key, fileName: `${key}.js` };
+    const item = { type: 'js', key, fileName: key+'.js' };
     item.value = new Blob([value], {
       type: 'text/javascript',
     });
