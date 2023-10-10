@@ -405,7 +405,7 @@ JSONSort.parse("{}")
 
 | 属性 |  类型 | 说明 | 示例
 | :----- | :---- | :---- |  :---- |
-| result | String | android翻译文件文本内容 | <?xml version="1.0" encoding="utf-8"?>\n<resources>\n${value}\n</resources> |
+| result | String | android翻译文件文本内容 | <?xml version="1.0" encoding="utf-8"?><resources>${value}</resources> |
 
 ### js翻译文件内容
 ```jsonToJavascript(options)```
