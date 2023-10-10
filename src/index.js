@@ -2,6 +2,7 @@ import './modules/convert'; // 数据转换
 
 export { default as JSONSort } from './modules/JSONSort'; // json属性排序
 export { default as CONSTANTS } from './modules/constants'; // 常量
+export { isAndroid, isApple, isDingtalk, isMicroMessenger, isWeibo, isQQ, isMiniProgram, isCfmotoApp, isZeehoApp, isMobile } from './modules/userAgent';
 export { queryParse, queryStringify, underlineToHump, humpToUnderline, filterValue, formatterLatelyTime, parseObjectClass, parseObjectStyle } from './modules/convert'; // 数据转换
 export { rgbToHex, hexToRGB } from './modules/color'; // 数据转换
 export {

@@ -125,9 +125,39 @@ CONSTANTS.PATTERN_PASSWORD
 
 ```
 
+## 三、用户环境
 
-## 三、功能与数据
+### 是否安卓系统
+```isAndroid()```
 
+### 是苹果系统
+```isApple()```
+
+### 是否微信
+```isMicroMessenger()```
+
+### 是否小程序
+```isMiniProgram()```
+
+### 是否QQ
+```isQQ()```
+
+### 是否微博
+```isWeibo()```
+
+### 是否钉钉
+```isDingtalk()```
+
+### 是否移动端
+```isMobile()```
+
+### 是否CFMOTO APP
+```isCfmotoApp()```
+
+### 是否ZEEHO APP
+```isZeehoApp()```
+
+## 四、功能与数据
 
 ### 节流防抖 
 ```throttle(time,callback)```
@@ -331,7 +361,7 @@ JSONSort.stringify({a:'11', b: '22'});
 JSONSort.parse("{}")
 ```
 
-## 四、文件
+## 五、文件
 
 ### url下载后转为base64 
 ```urlToBase64(url)```
