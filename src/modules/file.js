@@ -217,9 +217,7 @@ export function jsonToJavascript(options = {}) {
 
   return Object.keys(options).map((key) => {
     const items = options[key];
-    const value = `
-    /* eslint-disable max-len */
-    export default ${JSON.stringify(parseObjectValue(items), null, '  ')}
+    const value = `/* eslint-disable max-len */\nexport default ${JSON.stringify(parseObjectValue(items), null, '  ')}
     `;
     const item = { type: 'js', key, fileName: key+'.js' };
     item.value = new Blob([value], {
