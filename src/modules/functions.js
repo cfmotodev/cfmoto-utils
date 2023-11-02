@@ -7,7 +7,7 @@
 /**
  * 节流防抖
  */
-export function throttle(delay,fn) {
+export function throttle(delay, fn) {
   // last为上一次触发回调的时间, timer是定时器
   let last = 0;
   let timer = null;
@@ -65,9 +65,9 @@ export function recursiveNode(id = 'id', parentId = 'parentId', children = 'chil
 
 /**
  * 展开节点
- * @param {*} values 
- * @param {*} children 
- * @returns 
+ * @param {*} values
+ * @param {*} children
+ * @returns
  */
 export function spreadNode(values = [], children = 'children') {
   if (!value || !value.length) return value;
@@ -85,7 +85,7 @@ export function spreadNode(values = [], children = 'children') {
 
 /**
  * 随机UUID
- * @returns 
+ * @returns
  */
 export function randomUUID() {
   const tempUrl = URL.createObjectURL(new Blob());
@@ -107,9 +107,14 @@ export function ossImageResize(outSrc, outWidth = 80, outHeight, v = new Date().
 }
 
 // OSS视频快照
-export function ossVideoSnapshot(outSrc, outWidth = 80, outHeight = 80, v = new Date().getTime()) {
-  if (!outSrc || /(jpg|png|gif|jpeg)$/.test(outSrc)) return outSrc || '';
-  const backgroundImageUrl = /^http/.test(outSrc) ? `${outSrc.split('?')[0]}?x-oss-process=video/snapshot,t_1000,w_${outWidth},h_${outHeight},f_jpg,m_fast&v=${v}` : outSrc;
+export function ossVideoSnapshot(options = {}) {
+  const { src, width, height, position, v } = options;
+  if (!src || /(jpg|png|gif|jpeg)$/.test(src)) return src || '';
+  const width0 = width ? `,w_${width}` : '';
+  const height0 = height ? `h_${height}` : '';
+  const position0 = position || 1000;
+  const v0 = v || new Date().getTime();
+  const backgroundImageUrl = /^http/.test(outSrc) ? `${outSrc.split('?')[0]}?x-oss-process=video/snapshot,t_${position0}${width0}${height0},f_jpg,m_fast&v=${v0}` : src;
   return backgroundImageUrl;
 }
 

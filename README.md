@@ -231,14 +231,15 @@ CONSTANTS.PATTERN_PASSWORD
 | result | String | 新的地址 | https://xxx.xxx.com/xxx.jpg?x-oss-process=image/resize,m_lfit,w=100,h_100&v=12334455545 |
 
 ### OSS视频快照
-```ossVideoSnapshot(src, width, height, v)```
+```ossVideoSnapshot(options)```
 
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
 | :-----| :---- | :---- | :---- | :---- |
-| src | String | 是 | https://xxxx.xxx.com/xxx.mp4 | oss视频地址 |
-| width | String | 否 | 100 | 宽度 |
-| height | String | 否 | 100 | 调试 |
-| v | String | 否 | 1.0.0 | 版本号防止缓存，默认为timestamp |
+| options.src | String | 是 | https://xxxx.xxx.com/xxx.mp4 | oss视频地址 |
+| options.width | String | 否 | 100 | 宽度 |
+| options.height | String | 否 | 100 | 调试 |
+| options.position | Number | 否 | 1000 | 位置:毫秒 |
+| option.v | String | 否 | 1.0.0 | 版本号防止缓存，默认为timestamp |
 
 - 返回值 String result
 
