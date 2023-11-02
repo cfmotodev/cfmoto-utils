@@ -114,7 +114,7 @@ export function ossVideoSnapshot(options = {}) {
   const height0 = height ? `h_${height}` : '';
   const position0 = position || 1000;
   const v0 = v || new Date().getTime();
-  const backgroundImageUrl = /^http/.test(outSrc) ? `${outSrc.split('?')[0]}?x-oss-process=video/snapshot,t_${position0}${width0}${height0},f_jpg,m_fast&v=${v0}` : src;
+  const backgroundImageUrl = /^http/.test(rc) ? `${src.split('?')[0]}?x-oss-process=video/snapshot,t_${position0}${width0}${height0},f_jpg,m_fast&v=${v0}` : src;
   return backgroundImageUrl;
 }
 
