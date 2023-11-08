@@ -95,15 +95,16 @@ export function randomUUID() {
 }
 
 // OSS缩略图
-export function ossImageResize(options={}) {
-  const { src, width, height, position, v } = options;
+export function ossImageResize(options = {}) {
+  const { src, width, height, v } = options;
   if (!src) return '';
-  const srcs = typeof outSrc === 'string' ? [outSrc] : outSrc || [];
+  const srcs = typeof src === 'string' ? [src] : src || [];
   const newSrcs = srcs.map((itemSrc) => {
     if (!/^http/.test(itemSrc) || !/(jpg|png|gif|jpeg)$/.test(itemSrc)) return itemSrc;
-    const width0 = width ? `,w_${width}` : '';
+    const width0 = `,w_${width || 80}`;
     const height0 = height ? `,h_${height}` : '';
-    return `${itemSrc.split('?')[0]}?x-oss-process=image/resize,m_lfit${width0}${height0}&v=${v}`;
+    const v0 = v || new Date().getTime();
+    return `${itemSrc.split('?')[0]}?x-oss-process=image/resize,m_lfit${width0}${height0}&v=${v0}`;
   });
   return newSrcs;
 }
@@ -112,7 +113,7 @@ export function ossImageResize(options={}) {
 export function ossVideoSnapshot(options = {}) {
   const { src, width, height, position, v } = options;
   if (!src || /(jpg|png|gif|jpeg)$/.test(src)) return src || '';
-  const width0 = width ? `,w_${width}` : '';
+  const width0 = width ? `,w_${width || 80}` : '';
   const height0 = height ? `,h_${height}` : '';
   const position0 = position || 1000;
   const v0 = v || new Date().getTime();
