@@ -95,15 +95,17 @@ export function randomUUID() {
 }
 
 // OSS缩略图
-export function ossImageResize(outSrc, outWidth = 80, outHeight, v = new Date().getTime()) {
-  if (!outSrc) return '';
-  const src = typeof outSrc === 'string' ? [outSrc] : outSrc || [];
-  const srcs = src.map((itemSrc) => {
+export function ossImageResize(options={}) {
+  const { src, width, height, position, v } = options;
+  if (!src) return '';
+  const srcs = typeof outSrc === 'string' ? [outSrc] : outSrc || [];
+  const newSrcs = srcs.map((itemSrc) => {
     if (!/^http/.test(itemSrc) || !/(jpg|png|gif|jpeg)$/.test(itemSrc)) return itemSrc;
-    const size = outHeight ? `w_${outWidth},h_${outHeight}` : `w_${outWidth}`;
-    return `${itemSrc.split('?')[0]}?x-oss-process=image/resize,m_lfit,${size}&v=${v}`;
+    const width0 = width ? `,w_${width}` : '';
+    const height0 = height ? `,h_${height}` : '';
+    return `${itemSrc.split('?')[0]}?x-oss-process=image/resize,m_lfit${width0}${height0}&v=${v}`;
   });
-  return typeof outSrc === 'string' ? srcs[0] : srcs;
+  return newSrcs;
 }
 
 // OSS视频快照
@@ -111,7 +113,7 @@ export function ossVideoSnapshot(options = {}) {
   const { src, width, height, position, v } = options;
   if (!src || /(jpg|png|gif|jpeg)$/.test(src)) return src || '';
   const width0 = width ? `,w_${width}` : '';
-  const height0 = height ? `h_${height}` : '';
+  const height0 = height ? `,h_${height}` : '';
   const position0 = position || 1000;
   const v0 = v || new Date().getTime();
   const backgroundImageUrl = /^http/.test(src) ? `${src.split('?')[0]}?x-oss-process=video/snapshot,t_${position0}${width0}${height0},f_jpg,m_fast&v=${v0}` : src;

@@ -215,14 +215,14 @@ CONSTANTS.PATTERN_PASSWORD
 
 
 ### oss缩略图
-```ossImageResize(src, width, height, v)```
+```ossImageResize(options)```
 
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
 | :-----| :---- | :---- | :---- | :---- |
-| src | String | 是 | https://xxxx.xxx.com/xxx.jpg | oss图片地址 |
-| width | String | 否 | 100 | 宽度 |
-| height | String | 否 | 100 | 调试 |
-| v | String | 否 | 1.0.0 | 版本号防止缓存，默认为timestamp |
+| options.src | String or Array | 是 | https://xxxx.xxx.com/xxx.jpg | oss图片地址 |
+| options.width | String | 否 | 100 | 宽度 |
+| options.height | String | 否 | 100 | 调试 |
+| options.v | String | 否 | 1.0.0 | 版本号防止缓存，默认为timestamp |
 
 - 返回值 String result
 
