@@ -96,20 +96,22 @@ export function randomUUID() {
 
 // OSS缩略图
 export function ossImageResize(options = {}) {
-  const { src, width, height, longLength, v } = options;
-  if (!src) return '';
-  const srcs = typeof src === 'string' ? [src] : src || [];
+  const defaultOptions = { m: 'lfit', limit: 1 };
+  const o = { ...defaultOptions, ...options };
+  if (!o.src) return '';
+  const srcs = typeof o.src === 'string' ? [o.src] : o.src || [];
   const newSrcs = srcs.map((itemSrc) => {
     if (!/^http/.test(itemSrc) || !/(jpg|png|gif|jpeg)$/.test(itemSrc)) return itemSrc;
-    const width0 = width ? `,w_${width}` : '';
-    const height0 = height ? `,h_${height}` : '';
-    const m_lfit = width0 || height0 ? `,m_lfit${width0}${height0}` : '';
-    const longLength0 = longLength ? `,l_${longLength}` : '';
-    const imageResize = m_lfit || longLength0 ? `x-oss-process=image/resize${m_lfit}${longLength0}` : '';
-    const v0 = v || new Date().getTime();
-    return `${itemSrc.split('?')[0]}?v=${v0}&${imageResize}`;
+    const m = `,${o.m}`;
+    const w = o.w ? `,w_${o.w}` : '';
+    const h = o.h ? `,h_${o.h}` : '';
+    const l = o.l ? `,l_${o.l}` : '';
+    const s = o.s ? `,s_${o.s}` : '';
+    const limit = `,limit_${o.limit}`
+    const v0 = o.v || new Date().getTime();
+    return `${itemSrc.split('?')[0]}?x-oss-process=image/resize${m}${w}${h}${l}${s}${limit}&v=${v0}`;
   });
-  return typeof src === 'string' ? newSrcs[0] : newSrcs;
+  return typeof o.src === 'string' ? newSrcs[0] : newSrcs;
 }
 
 // OSS视频快照

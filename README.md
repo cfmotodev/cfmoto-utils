@@ -220,9 +220,12 @@ CONSTANTS.PATTERN_PASSWORD
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
 | :-----| :---- | :---- | :---- | :---- |
 | options.src | String or Array | 是 | https://xxxx.xxx.com/xxx.jpg | oss图片地址 |
-| options.width | String | 否 | 100 | 宽度 |
-| options.height | String | 否 | 100 | 高度 |
-| options.longLength | Number | 否 | 100 | 长边宽度 |
+| options.m | String | 否 | lfit | 模式：lfit、mfit、fill、pad、fixed，默认为 lfit |
+| options.w | Number | 否 | 1-4096 | 宽度 |
+| options.h | Number | 否 | 1-4096 | 高度 |
+| options.l | Number | 否 | 1-4096 | 长边宽度 |
+| options.s | Number | 否 | 1-4096 | 短边宽度 |
+| options.limit | Number | 否 | 1 | 0/1, 默认是 1 |
 | options.v | String | 否 | 1.0.0 | 版本号防止缓存，默认为timestamp |
 
 - 返回值 String result
@@ -237,7 +240,7 @@ CONSTANTS.PATTERN_PASSWORD
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
 | :-----| :---- | :---- | :---- | :---- |
 | options.src | String | 是 | https://xxxx.xxx.com/xxx.mp4 | oss视频地址 |
-| options.width | String | 否 | 100 | 宽度 |
+| options.widwth | String | 否 | 100 | 宽度 |
 | options.height | String | 否 | 100 | 高度 |
 | options.position | Number | 否 | 1000 | 位置:毫秒 |
 | option.v | String | 否 | 1.0.0 | 版本号防止缓存，默认为timestamp |

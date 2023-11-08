@@ -1,6 +1,6 @@
 {
   "name": "cfmoto-utils",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "cfmoto 工具集",
   "main": "src/index.js",
   "scripts": {
