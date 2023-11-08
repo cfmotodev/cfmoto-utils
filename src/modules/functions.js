@@ -96,17 +96,20 @@ export function randomUUID() {
 
 // OSS缩略图
 export function ossImageResize(options = {}) {
-  const { src, width, height, v } = options;
+  const { src, width, height, longLength, v } = options;
   if (!src) return '';
   const srcs = typeof src === 'string' ? [src] : src || [];
   const newSrcs = srcs.map((itemSrc) => {
     if (!/^http/.test(itemSrc) || !/(jpg|png|gif|jpeg)$/.test(itemSrc)) return itemSrc;
-    const width0 = `,w_${width || 80}`;
+    const width0 = width ? `,w_${width}` : '';
     const height0 = height ? `,h_${height}` : '';
+    const m_lfit = width0 || height0 ? `,m_lfit${width0}${height0}` : '';
+    const longLength0 = longLength ? `,l_${longLength}` : '';
+    const imageResize = m_lfit || longLength0 ? `x-oss-process=image/resize${m_lfit}${longLength0}` : '';
     const v0 = v || new Date().getTime();
-    return `${itemSrc.split('?')[0]}?x-oss-process=image/resize,m_lfit${width0}${height0}&v=${v0}`;
+    return `${itemSrc.split('?')[0]}?v=${v0}&${imageResize}`;
   });
-  return newSrcs;
+  return typeof src === 'string' ? newSrcs[0] : newSrcs;
 }
 
 // OSS视频快照
