@@ -107,7 +107,7 @@ export function ossImageResize(options = {}) {
     const h = o.h ? `,h_${o.h}` : '';
     const l = o.l ? `,l_${o.l}` : '';
     const s = o.s ? `,s_${o.s}` : '';
-    const limit = `,limit_${o.limit}`
+    const limit = `,limit_${o.limit}`;
     const v0 = o.v || new Date().getTime();
     return `${itemSrc.split('?')[0]}?x-oss-process=image/resize${m}${w}${h}${l}${s}${limit}&v=${v0}`;
   });
@@ -116,14 +116,22 @@ export function ossImageResize(options = {}) {
 
 // OSS视频快照
 export function ossVideoSnapshot(options = {}) {
-  const { src, width, height, position, v } = options;
-  if (!src || /(jpg|png|gif|jpeg)$/.test(src)) return src || '';
-  const width0 = width ? `,w_${width || 80}` : '';
-  const height0 = height ? `,h_${height}` : '';
-  const position0 = position || 1000;
-  const v0 = v || new Date().getTime();
-  const backgroundImageUrl = /^http/.test(src) ? `${src.split('?')[0]}?x-oss-process=video/snapshot,t_${position0}${width0}${height0},f_jpg,m_fast&v=${v0}` : src;
-  return backgroundImageUrl;
+  const defaultOptions = { m: '' };
+  const o = { ...defaultOptions, ...options };
+  if (!o.src) return '';
+  const srcs = typeof o.src === 'string' ? [o.src] : o.src || [];
+  const newSrcs = srcs.map((itemSrc) => {
+    if (!/^http/.test(itemSrc) || !/(mp4|mpg|mpeg|avi|ogg|wmv)$/.test(itemSrc)) return itemSrc;
+    const m = o.m ? `,m_${o.m}` : '';
+    const w = o.w ? `,w_${o.w}` : '';
+    const h = o.h ? `,h_${o.h}` : '';
+    const f = o.f ? `,f_${o.f}` : '';
+    const t = `,t_${o.t || 1000}`;
+    const ar = o.ar ? `,ar_${o.ar}` : '';
+    const v0 = o.v || new Date().getTime();
+    return `${itemSrc.split('?')[0]}?x-oss-process=video/snapshot${m}${w}${h}${t}${f}&v=${v0}`;
+  });
+  return typeof o.src === 'string' ? newSrcs[0] : newSrcs;
 }
 
 // 从应用市场唤起APP-国际标准

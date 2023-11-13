@@ -240,9 +240,12 @@ CONSTANTS.PATTERN_PASSWORD
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
 | :-----| :---- | :---- | :---- | :---- |
 | options.src | String | 是 | https://xxxx.xxx.com/xxx.mp4 | oss视频地址 |
-| options.widwth | String | 否 | 100 | 宽度 |
-| options.height | String | 否 | 100 | 高度 |
-| options.position | Number | 否 | 1000 | 位置:毫秒 |
+| options.w | Number | 否 | 100 | 指定截图宽度，如果指定为0，则自动计算 |
+| options.h | Number | 否 | 100 | 指定截图高度，如果指定为0，则自动计算；如果w和h都为0，则输出为原视频宽高 |
+| options.t | Number | 否 | 1000 | 单位：ms,指定截图时间。如果设置的截图时间t超过了视频时长，则返回视频的最后一帧关键帧 |
+| options.m | String | 否 | fast | 指定截图模式,不指定则为默认模式，根据时间精确截图。如果指定为fast，则截取该时间点之前的最近的一个关键帧 |
+| options.f | String | 否 | jpg or png | 指定输出图片的格式 |
+| options.ar | String | 否 | auto or h or w | 指定是否根据视频信息自动旋转图片 |
 | option.v | String | 否 | 1.0.0 | 版本号防止缓存，默认为timestamp |
 
 - 返回值 String result
