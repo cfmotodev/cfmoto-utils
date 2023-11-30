@@ -129,7 +129,7 @@ export function ossVideoSnapshot(options = {}) {
     const t = `,t_${o.t || 1000}`;
     const ar = o.ar ? `,ar_${o.ar}` : '';
     const v0 = o.v || new Date().getTime();
-    return `${itemSrc.split('?')[0]}?x-oss-process=video/snapshot${m}${w}${h}${t}${f}&v=${v0}`;
+    return `${itemSrc.split('?')[0]}?x-oss-process=video/snapshot${m}${w}${h}${t}${f}${ar}&v=${v0}`;
   });
   return typeof o.src === 'string' ? newSrcs[0] : newSrcs;
 }
