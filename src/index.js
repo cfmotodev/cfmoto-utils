@@ -23,4 +23,4 @@ export {
   pdfFileToPage,
   pdfPageToImage,
 } from './modules/file'; // 文件处理
-export { throttle, recursiveNode, spreadNode, randomUUID, ossImageResize, ossVideoSnapshot, launchApplication, launchApplicationDAMS } from './modules/functions'; // 功能
+export { throttle, recursiveNode, spreadNode, randomUUID, convertThousandth, ossImageResize, ossVideoSnapshot, launchApplication, launchApplicationDAMS } from './modules/functions'; // 功能
