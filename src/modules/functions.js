@@ -94,6 +94,17 @@ export function randomUUID() {
   return uuid0.substring(uuid0.lastIndexOf('/') + 1);
 }
 
+/**
+ * 千分位转换
+ * @param {*} value
+ */
+export function convertThousandth(value, defaultValue = '0') {
+  if (value === '' || value === null || value === undefined) return defaultValue;
+  const intPart = Number(value).toFixed(0); // 获取整数部分
+  const intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); // 将整数部分逢三一断
+  return intPartFormat;
+}
+
 // OSS缩略图
 export function ossImageResize(options = {}) {
   const defaultOptions = { m: 'lfit', limit: 1 };

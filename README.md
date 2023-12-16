@@ -263,6 +263,17 @@ CONSTANTS.PATTERN_PASSWORD
 | :----- | :---- | :---- |  :---- |
 | result | String | uuid | dadd-ddafd-fddf-fdsfs |
 
+### 千分位转换
+```convertThousandth```
+- 返回值 String result
+
+| 属性 |  类型 | 说明 | 示例
+| :----- | :---- | :---- |  :---- |
+| value | String Or Number | 数值 | 12333.000 |
+| defaultValue | String Or Number | 默认值 | 0 |
+
+- 返回值 String result
+
 ### 解析url查询参数
 ```queryParse(url)```
 | 参数 | 参数类型 | 是否必须 | 参数值 | 参数说明 |
