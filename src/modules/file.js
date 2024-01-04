@@ -8,7 +8,10 @@
  * @returns
  */
 export const urlToBase64 = async (url) => {
-  if (!/^[\w]+\\:/.test(url) && !/^\//.test(url)) {
+  // if (!/^[\w]+\\:/.test(url) && !/^\//.test(url)) {
+  //   return url;
+  // }
+  if (!/^[\w]+:\/\//.test(url) ) {
     return url;
   }
   const version = /\?/.test(url) ? `&v=${new Date().getTime()}` : `?v=${new Date().getTime()}`;
