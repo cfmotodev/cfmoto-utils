@@ -102,7 +102,9 @@ export function convertThousandth(value, defaultValue = '0') {
   if (value === '' || value === null || value === undefined) return defaultValue;
   const intPart = Number(value).toFixed(0); // 获取整数部分
   const intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,'); // 将整数部分逢三一断
-  return intPartFormat;
+  const digitalPart = `${value}`.split('.')[1] || '';
+  const digitalFormat = (digitalPart ? '.' : '') + digitalPart;
+  return intPartFormat + digitalFormat;
 }
 
 // OSS缩略图
